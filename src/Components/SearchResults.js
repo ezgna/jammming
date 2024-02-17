@@ -1,10 +1,9 @@
 import React from "react";
-import SearchBar from "./SearchBar";
 
-const SearchResults = () => {
+const SearchResults = ({ onAdd }) => {
   return (
     <div>
-      <SearchBar />
+      <button onClick={() => onAdd}>+</button>
     </div>
   );
 };

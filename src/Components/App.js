@@ -1,16 +1,14 @@
 // import logo from '../logo.svg';
+import React, { useState } from 'react';
 import '../App.css';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Playlist from './Playlist';
 
 function App() {
-  // const [playlistName, setPlaylistName] = useState("New Playlist");
-  // const [playlistTracks, setPlaylistTracks] = useState([]);
-
-  const playlistName = "New Playlist";
-  const playlistTracks = [
-    {
+  const [playlistName, setPlaylistName] = useState("New Playlist");
+  const [playlistTracks, setPlaylistTracks] = useState(
+    [{
       name: "name1",
       artist: "artist1",
       album: "album1",
@@ -27,17 +25,21 @@ function App() {
       artist: "artist3",
       album: "album3",
       id: 3
+    }]);
+
+  const addTrack = (track) => {
+    if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
+      return;
     }
-  ];
+    setPlaylistTracks([...playlistTracks, track]);
+  }
 
   return (
-    <div>
+    <>
       <SearchBar />
-      <div className="App">
-        <SearchResults />
-        <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
-      </div>
-    </div>
+      <SearchResults onAdd={addTrack} />
+      <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
+    </>
   )
 
 

@@ -36,7 +36,7 @@ const SearchBar = () => {
       <button onClick={() => console.log(search)}>Search</button>
       <div>
         {tracks.map((track) => (
-          <Track track={track} key={track.id} />
+          <Track track={track} />
         ))}
       </div>
     </div>

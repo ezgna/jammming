@@ -1,0 +1,38 @@
+.Track:not(:first-child) {
+    border-top: 1px solid white;
+}
+
+.Track-information {
+    color: rgb(235, 235, 235);
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 5fr;
+    grid-template-rows: 4.5rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.Track-information h3 {
+    line-height: 1;
+    justify-self: end;
+}
+
+.Track-action {
+    justify-self: start;
+    background-color: #1db954d5;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
+    line-height: 1;
+    justify-self: center;
+}
+
+.Track-details {
+    grid-column: 4;
+    justify-self: start;
+}
+
+.Track-details p {
+    margin: 0.5rem;
+}

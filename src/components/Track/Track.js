@@ -1,18 +1,18 @@
 import React, { useCallback } from "react";
 import './Track.css';
 
-const Track = (props) => {
+const Track = ({ track, onAdd, onRemove, isRemoval }) => {
 
     const addTrack = useCallback(() => {
-        props.onAdd(props.track);
-    }, [props.onAdd, props.track]);
+        onAdd(track);
+    }, [onAdd, track]);
 
     const removeTrack = useCallback(() => {
-        props.onRemove(props.track);
-    }, [props.onRemove, props.track]);
+        onRemove(track);
+    }, [onRemove, track]);
 
     const renderAction = () => {
-        if (props.isRemoval) {
+        if (isRemoval) {
             return (
                 <button className="Track-action" onClick={removeTrack}>
                     -
@@ -29,11 +29,10 @@ const Track = (props) => {
     return (
         <div className="Track">
             <div className="Track-information">
-                <h3>{props.track.name}</h3>
+                <h3>{track.name}</h3>
                 {renderAction()}
                 <div className="Track-details">
-                    <p>{props.track.artist}</p>
-                    <p>{props.track.album}</p>
+                    <p>{track.artist}  |  {track.album}</p>
                 </div>
             </div>
         </div>

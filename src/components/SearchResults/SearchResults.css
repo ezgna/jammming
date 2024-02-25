@@ -1,11 +1,13 @@
 .SearchResults {
-    margin-top: 5rem;
+    margin-top: 3rem;
     margin-left: 15rem;
     width: 36%;
     background-color: rgba(16, 4, 58, 0.849);
     padding-bottom: 20rem;
     box-shadow: 0 0 10px 0 white;
     border-radius: 5px;
+    overflow-y: scroll;
+    height: 25vh;
 }
 
 .SearchResults h2 {

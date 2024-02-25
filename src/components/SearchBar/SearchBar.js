@@ -8,10 +8,14 @@ const SearchBar = (props) => {
         setTerm(event.target.value);
     }, []);
 
+    const search = () => {
+        props.onSearch(term);
+    }
+
     return (
         <div className="SearchBar">
             <input placeholder="Enter A Song Title" onChange={handleTermChange} />
-            <button className="SearchButton">SEARCH</button>
+            <button className="SearchButton" onClick={search}>SEARCH</button>
         </div>
     );
 }

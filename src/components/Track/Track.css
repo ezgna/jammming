@@ -10,6 +10,7 @@
     align-items: center;
     justify-items: center;
     margin: 0.5rem 0;
+    width: 100%;
 }
 
 .Track-information h3 {

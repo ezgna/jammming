@@ -1,13 +1,14 @@
-const clientId = '67948dda46f94739882afa25c610facd';
-const redirectUri = 'http://localhost:3000/';
+const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+const redirectUri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
 const spotifyAccountsUrl = 'https://accounts.spotify.com/authorize';
 
 let accessToken;
+let tokenExpirationTime;
 
 const Spotify = {
 
     getAccessToken() {
-        if (accessToken) {
+        if (accessToken && Date.now() < tokenExpirationTime) {
             return accessToken;
         }
 
@@ -17,11 +18,13 @@ const Spotify = {
         if (accessTokenMatch && expiresInMatch) {
             accessToken = accessTokenMatch[1];
             const expiresIn = Number(expiresInMatch[1]);
+            tokenExpirationTime = Date.now() + (expiresIn * 1000);
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');
             return accessToken;
         } else {
             const scope = 'user-read-private user-read-email playlist-modify-public';
+            console.log(`Redirecting to: ${spotifyAccountsUrl}?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}`);
             window.location = `${spotifyAccountsUrl}?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
         }
     },

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import './Track.css';
 
-const Track = ({ track, onAdd, onRemove, isRemoval }) => {
+const Track = ({ track, onAdd, onRemove, isRemoval, onPlayPreview }) => {
 
     const addTrack = useCallback(() => {
         onAdd(track);
@@ -26,6 +26,7 @@ const Track = ({ track, onAdd, onRemove, isRemoval }) => {
         );
     };
 
+
     return (
         <div className="Track">
             <div className="Track-information">
@@ -34,6 +35,7 @@ const Track = ({ track, onAdd, onRemove, isRemoval }) => {
                 <div className="Track-details">
                     <p>{track.artist}  |  {track.album}</p>
                 </div>
+                <button onClick={() => onPlayPreview(track.previewUrl)}>▶</button>
             </div>
         </div>
     );

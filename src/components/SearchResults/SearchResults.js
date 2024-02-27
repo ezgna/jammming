@@ -9,6 +9,7 @@ const SearchResults = (props) => {
             <TrackList 
                 tracks={props.searchResults} 
                 onAdd={props.onAdd} 
+                onPlayPreview={props.onPlayPreview}
             />
         </div>
     )

@@ -13,6 +13,7 @@ const TrackList = (props) => {
                         onAdd={props.onAdd}
                         onRemove={props.onRemove}
                         isRemoval={props.isRemoval}
+                        onPlayPreview={props.onPlayPreview}
                     />
                 )
             })}

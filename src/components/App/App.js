@@ -54,6 +54,37 @@ function App() {
   }, [playlistTracks, setPlaylistTracks, playlistName, setplaylistName]);
 
 
+  const [playingAudio, setPlayingAudio] = useState(null);
+  const [lastPlayedTime, setLastPlayedTime] = useState(0);
+
+  const playPreview = useCallback((previewUrl) => {
+    if (playingAudio) {
+      if (playingAudio.src === previewUrl) {
+        if (!playingAudio.paused) {
+          playingAudio.pause();
+          setLastPlayedTime(playingAudio.currentTime);
+          return;
+        } else {
+          playingAudio.currentTime = lastPlayedTime;
+          playingAudio.play();
+          return;
+        }
+      }
+      playingAudio.pause();
+      playingAudio.currentTime = 0;
+    }
+    const audio = new Audio(previewUrl);
+    audio.play();
+    setPlayingAudio(audio);
+    setLastPlayedTime(0);
+
+    audio.onended = () => {
+      setPlayingAudio(null);
+      setLastPlayedTime(0);
+    }
+  }, [playingAudio, setPlayingAudio, lastPlayedTime, setLastPlayedTime]);
+
+
   return (
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
@@ -63,6 +94,7 @@ function App() {
           <SearchResults 
             searchResults={searchResults} 
             onAdd={addTrack} 
+            onPlayPreview={playPreview}
           />
           <Playlist 
             playlistTracks={playlistTracks}
@@ -70,6 +102,7 @@ function App() {
             playlistName={playlistName}
             onNameChange={updatePlaylistName}
             onSave={savePlaylist}
+            onPlayPreview={playPreview}
           />
         </div>
       </div>

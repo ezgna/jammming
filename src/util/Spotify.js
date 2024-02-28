@@ -24,7 +24,6 @@ const Spotify = {
             return accessToken;
         } else {
             const scope = 'user-read-private user-read-email playlist-modify-public';
-            console.log(`Redirecting to: ${spotifyAccountsUrl}?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}`);
             window.location = `${spotifyAccountsUrl}?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
         }
     },

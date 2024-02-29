@@ -9,7 +9,7 @@ function App() {
 
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(localStorage.getItem('searchTerm') || '');
+  const [searchTerm] = useState(localStorage.getItem('searchTerm') || '');
 
   const search = useCallback((term) => {
     Spotify.search(term).then(searchResults => {
@@ -23,7 +23,7 @@ function App() {
     if (searchTerm) {
       search(searchTerm);
     }
-  }, []);
+  }, [searchTerm, search]);
 
 
   const addTrack = useCallback((track) => {
@@ -48,7 +48,7 @@ function App() {
   const updatePlaylistName = useCallback((name) => {
     setplaylistName(name);
     localStorage.setItem('playlistName', playlistName);
-  }, []);
+  }, [playlistName]);
 
   const [isLoading, setIsLoading] = useState(false);
 
